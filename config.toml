@@ -1,0 +1,119 @@
+baseURL = "plutack.github.io"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
+theme = "hermit-v2"
+
+[languages]
+
+[languages.en]
+title = 'Blog'
+
+[languages.en.params]
+homeSubtitle = "unfiltered thoughts"
+weight = 1
+#  [languages.fr]
+#    title = 'CHANGE ME(FR)'
+#    [languages.fr.params]
+#      homeSubtitle = "CHANGE ME"
+#    weight = 2
+#  [languages.it]
+#    title = 'CHANGE ME(IT)'
+#    [languages.it.params]
+#      homeSubtitle = "CHANGE ME"
+#    weight = 3
+languageCode = "en-us"
+# title = "CHANGE ME"
+# enableGitInfo = true
+pygmentsCodefences = true
+pygmentsUseClasses = true
+#hasCJKLanguage = true
+rssLimit = 10
+copyright = "CHANGE ME"
+enableEmoji = true
+
+[services]
+
+[services.disqus]
+shortname = 'plutack'
+
+[services.googleAnalytics]
+id = 'G-F53RCN10JF'
+
+[frontmatter]
+date = ["lastmod", "date", "publishDate"]
+lastmod = ["date", "publishDate", "lastmod", ":git"]
+publishDate = ["publishDate", "date"]
+expiryDate = ["expiryDate"]
+
+[params.author]
+name = "Talut Salako"
+about = "talut-salako.md"
+
+[blackfriday]
+
+# hrefTargetBlank = true
+# noreferrerLinks = true
+# nofollowLinks = true
+[taxonomies]
+tag = "tags"
+
+# Categories are disabled by default.
+# category = "categories"
+# Enable to get proper Mathjax support
+#[markup]
+#  [markup.goldmark]
+#    [markup.goldmark.extensions]
+#      [markup.goldmark.extensions.passthrough]
+#        enable = true
+#        [markup.goldmark.extensions.passthrough.delimiters]
+#          block = [['\[', '\]'], ['$$', '$$']]
+#          inline = [['\(', '\)']]
+[params]
+dateform = "Jan 2, 2006"
+dateformShort = "Jan 2"
+dateformNum = "2006-01-02"
+dateformNumTime = "2006-01-02 15:04 -0700"
+# description = "My Blog Site"
+# images = [""]
+footerCopyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+themeColor = "#494f5c"
+#homeSubtitle = "CHANGE ME HOME SUBTITLE"
+# bgImg = ""
+# gitUrl = "https://github.com/plutack"
+justifyContent = false
+relatedPosts = true
+code_copy_button = true
+homeSubtitlePrinter = true
+scrollToTop = true
+global_mathjax = false
+readTime = true
+readTimeSeparator = "\u2026 \u23F2 Reading Time:"
+# legacyLayout = false
+shareSocial = true
+# googleTagManager = "GTM-XXXXXXXX"
+# tagSymbol = "#"
+# categorySymbol = "⊲"
+pinned = "Pinned Posts"
+# pinnedSVGname = "pin"
+descriptionInPosts = true
+
+# initialPublish = "Initally Posted on: "
+[[params.socialLinks]]
+name = "x"
+url = "https://x.com/salakotalut"
+
+[[params.socialLinks]]
+name = "github"
+url = "https://github.com/plutack"
+
+[menu]
+
+[[menu.main]]
+name = "Posts"
+url = "posts/"
+weight = 10
+
+[[menu.main]]
+name = "About"
+url = "about-hugo/"
+weight = 20
