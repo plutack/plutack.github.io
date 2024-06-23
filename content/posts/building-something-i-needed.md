@@ -13,6 +13,6 @@ As a beginner software developer looking to break into the workforce, one of the
 
 I finally had my Eureka moment when an idea popped into my head. I am an avid news follower; it is part of my daily routine. From watching a large chunk—sometimes all 3-hours—of The Morning Show on Arise TV on YouTube, to browsing different sites to see what is happening in my country and the world at large. I hope you can see where I am going with this. It dawned on me that I could try to collect the front pages of some of the popular newspapers in my country, as quite a number of them have them on display on their website. I could aggregate them and serve them to myself somehow.
 
-I must admit I was quite pleased with myself for coming up with this idea, as it was definitely going to be useful for me, which I have come to agree is really important. This is how the [newspaper frontpage aggregator](https://github.com/plutack/Newspaper-Frontpage-Aggregator) was born.
+I must admit I was quite pleased with myself for coming up with this idea, as it was definitely going to be useful for me, which I have come to agree is really important. This is how [newspaper frontpage aggregator](https://github.com/plutack/Newspaper-Frontpage-Aggregator) was born.
 
 Stay tuned for my next post, where I will detail the building process, the challenges I faced, and the solutions I found along the way.
