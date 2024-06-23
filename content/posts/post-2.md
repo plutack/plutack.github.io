@@ -1,7 +1,7 @@
 ---
 title: "My Very First Project: Building Something I Needed"
 date: 2024-06-23T10:27:08+01:00
-draft: true
+draft: false
 toc: false
 images:
 tags: 
