@@ -8,7 +8,7 @@ tags:
   - dev-notes
 ---
 
-Frontpages is a simple web app that collects the front pages of popular newspapers in Nigeria, extracts the headlines, and cites articles and sources discussing those headlines. It’s designed to make it easier for you to stay informed without the hassle of jumping between multiple news sites.
+[Frontpages](https://frontpages.talut.tech) is a simple web app that collects the front pages of popular newspapers in Nigeria, extracts the headlines, and cites articles and sources discussing those headlines. It’s designed to make it easier for you to stay informed without the hassle of jumping between multiple news sites.
 
 #### Built With:
 
@@ -147,3 +147,6 @@ While I’m thrilled with how Frontpages has turned out so far, there are always
 5. **AI-Powered Summaries**: Leveraging AI to generate concise summaries of the headlines for quicker consumption.
 
 I’m excited about the journey ahead and can’t wait to see how Frontpages evolves. Stay tuned for more updates!
+Link to Repo: 
+  - [backend](https://github.com/plutack/frontpages-backend)
+  - [frontend](https://github.com/plutack/frontpages-frontend)
