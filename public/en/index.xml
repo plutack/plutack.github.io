@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog</title>
+    <link>//localhost:1313/en/</link>
+    <description>Recent content on Blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 22 Sep 2024 13:17:08 +0100</lastBuildDate>
+    <atom:link href="//localhost:1313/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Frontpages: Your Daily Dose of News in One Place</title>
+      <link>//localhost:1313/en/posts/frontpages/</link>
+      <pubDate>Sun, 22 Sep 2024 13:17:08 +0100</pubDate>
+      <guid>//localhost:1313/en/posts/frontpages/</guid>
+      <description>&lt;p&gt;Frontpages is a simple web app that collects the front pages of popular newspapers in Nigeria, extracts the headlines, and cites articles and sources discussing those headlines. It’s designed to make it easier for you to stay informed without the hassle of jumping between multiple news sites.&lt;/p&gt;&#xA;&lt;h4 id=&#34;built-with&#34;&gt;Built With:&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Hono&lt;/strong&gt; - server&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;MongoDB&lt;/strong&gt; - database&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Mongoose&lt;/strong&gt; - ORM for database interaction&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Using Hono was a refreshing experience compared to Express, which I was already familiar with. I loved the straightforward context object that houses the request and response objects, along with handy shortcuts like &lt;code&gt;ctx.json(responseObject)&lt;/code&gt; to send responses.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>My Very First Project: Building Something I Needed</title>
+      <link>//localhost:1313/en/posts/building-something-i-needed/</link>
+      <pubDate>Sun, 23 Jun 2024 10:27:08 +0100</pubDate>
+      <guid>//localhost:1313/en/posts/building-something-i-needed/</guid>
+      <description>&lt;p&gt;As a beginner software developer looking to break into the workforce, one of the common questions I face is: what kind of project should I build to showcase my skills? One of the more popular replies is along the lines of &amp;ldquo;Build something you can use&amp;rdquo; or &amp;ldquo;Build something that solves a problem for yourself.&amp;rdquo; This advice can be frustrating for me because I find it difficult to come up with ideas. I see myself as a soldier, a very good one, the kind you point at a problem and get good results delivered. So, coming up with a project that I would find useful was always going to be tricky.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Talut Salako</title>
+      <link>//localhost:1313/en/talut-salako/</link>
+      <pubDate>Sat, 22 Jun 2024 10:01:53 +0100</pubDate>
+      <guid>//localhost:1313/en/talut-salako/</guid>
+      <description>&lt;p&gt;Hello! My name is Talut Salako, and I am an aspiring backend Node.js developer with a deep passion for backend technology. When I&amp;rsquo;m not immersed in coding, I enjoy playing games, and I also have a keen interest in progressive fantasy novels. There&amp;rsquo;s something incredibly captivating about the journey of advancing and becoming stronger that really resonates with me.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>My Very First Post</title>
+      <link>//localhost:1313/en/posts/post-1/</link>
+      <pubDate>Sat, 22 Jun 2024 09:50:16 +0100</pubDate>
+      <guid>//localhost:1313/en/posts/post-1/</guid>
+      <description>&lt;h1 id=&#34;setting-up-hugo-on-github-pages&#34;&gt;Setting Up Hugo on Github pages&lt;/h1&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;console&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello world&amp;#34;&lt;/span&gt;);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+  </channel>
+</rss>

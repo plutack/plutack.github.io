@@ -1,0 +1,170 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on Blog</title>
+		<link>//localhost:1313/en/posts/</link>
+		<description>Recent content in Posts on Blog</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en</language>
+		<lastBuildDate>Sun, 22 Sep 2024 13:17:08 +0100</lastBuildDate>
+		<atom:link href="//localhost:1313/en/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Frontpages: Your Daily Dose of News in One Place</title>
+			<link>//localhost:1313/en/posts/frontpages/</link>
+			<pubDate>Sun, 22 Sep 2024 13:17:08 +0100</pubDate>
+			
+			<guid>//localhost:1313/en/posts/frontpages/</guid>
+			<description><![CDATA[%!s(<nil>)]]></description>
+			<content type="html"><![CDATA[<p>Frontpages is a simple web app that collects the front pages of popular newspapers in Nigeria, extracts the headlines, and cites articles and sources discussing those headlines. It’s designed to make it easier for you to stay informed without the hassle of jumping between multiple news sites.</p>
+<h4 id="built-with">Built With:</h4>
+<ul>
+<li><strong>Hono</strong> - server</li>
+<li><strong>MongoDB</strong> - database</li>
+<li><strong>Mongoose</strong> - ORM for database interaction</li>
+</ul>
+<p>Using Hono was a refreshing experience compared to Express, which I was already familiar with. I loved the straightforward context object that houses the request and response objects, along with handy shortcuts like <code>ctx.json(responseObject)</code> to send responses.</p>
+<p>Here’s a quick comparison of syntax:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// express syntax
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">someParam</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">param</span>(<span style="color:#e6db74">&#34;someParam&#34;</span>)
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({<span style="color:#e6db74">&#34;foo&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;bar&#34;</span>})
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// hono syntax
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#66d9ef">async</span>(<span style="color:#a6e22e">c</span>) =&gt; {
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">someParam</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">params</span>.<span style="color:#a6e22e">someParam</span><span style="color:#e6db74">&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   return c.json({&#34;</span><span style="color:#a6e22e">foo</span><span style="color:#e6db74">&#34;: &#34;</span><span style="color:#a6e22e">bar</span><span style="color:#960050;background-color:#1e0010">&#34;</span>})
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><p>I also think using middleware in Hono is syntactically cleaner!</p>
+<h4 id="a-peek-behind-the-scenes">A Peek Behind the Scenes</h4>
+<p>Here’s a simple flowchart illustrating the logic that goes on under the hood:</p>
+<pre class="mermaid">
+flowchart TD
+    A["Cron Job Starts at 9 AM"] --> B["Loop Through Each Newspaper"]
+    B --> C["Get Newspaper URL and Upload Image"]
+    C --> D["Convert Image to Base64 & Calculate Hash"]
+    D --> E["Analyze Image Using LLM"]
+    E -- If Success --> F["Save Newspaper Data"]
+    F --> G["Perform Google Search for Headlines"] & I["Check If Newspaper Already Exists"]
+    G --> H["Store Headline Search Results in Database"]
+    I -- If Exists --> J["Compare Hash and Update If Needed"]
+    I -- If New --> K["Create New Newspaper Entry"]
+    J --> L["Update Existing Entry in Database"]
+    K --> M["Save New Entry to Database"]
+    L --> N["Save or Update Search Results"]
+    M --> N
+    N --> O["End of Newspaper Process"]
+    O -- If All Newspapers Processed --> P["Cron Job Complete"]
+</pre>
+<p>For the LLM function, I initially thought about using ChatGPT because it outputs JSON directly. Unfortunately, I couldn&rsquo;t go that route due to the steep costs of the API. Instead, I opted for Google Gemini Flash, which is free—thank you, Google! The trade-off in this use case is that it doesn’t provide a direct JSON output. While Google allows you to define a schema for the response, the output still comes as plain text, requiring some extra parsing. Although the responses have been consistent, it still feels a bit off.</p>
+<p>Here’s an example of how I set up the response schema:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">GoogleGenerativeAI</span>, <span style="color:#a6e22e">SchemaType</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;@google/generative-ai&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">genAI</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">GoogleGenerativeAI</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">GEMINI_API_KEY</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">schema</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">description</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;api response&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SchemaType</span>.<span style="color:#a6e22e">OBJECT</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">properties</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SchemaType</span>.<span style="color:#a6e22e">BOOLEAN</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">description</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Success of prompt in parsing input image.&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">nullable</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">result</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SchemaType</span>.<span style="color:#a6e22e">ARRAY</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">items</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SchemaType</span>.<span style="color:#a6e22e">OBJECT</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">properties</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">headline</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SchemaType</span>.<span style="color:#a6e22e">STRING</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">description</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Headline as extracted in image.&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">nullable</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">search_query</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SchemaType</span>.<span style="color:#a6e22e">STRING</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">description</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;search query to use with google search api to get related news article.&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">nullable</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">tag</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SchemaType</span>.<span style="color:#a6e22e">ARRAY</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">items</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SchemaType</span>.<span style="color:#a6e22e">STRING</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">description</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Tags to select from as supplied in prompt.&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">nullable</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>              },
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">nullable</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">nullable</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SchemaType</span>.<span style="color:#a6e22e">STRING</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">description</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Error message as supplied in prompt.&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">nullable</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">model</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">genAI</span>.<span style="color:#a6e22e">getGenerativeModel</span>({ <span style="color:#a6e22e">model</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;gemini-1.5-flash&#34;</span> , <span style="color:#a6e22e">generationConfig</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">responseMimeType</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">responseSchema</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">schema</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>}, );
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ... unneccessary code ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">generateContent</span>([<span style="color:#a6e22e">prompt</span>,
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">inlineData</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">mimeType</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;image/png&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">dataUrlString</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>  ]);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cleanResponse</span>(<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">text</span>()))
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// ... more unneccessary code ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  
+</span></span></code></pre></div><p>For fetching related articles citing specific headlines, I rely on Google Custom Search. However, there’s a limit of 100 queries per day, so I have to manage my requests carefully.</p>
+<h3 id="future-improvements">Future Improvements</h3>
+<p>While I’m thrilled with how Frontpages has turned out so far, there are always opportunities for improvement! Here are a few ideas I’m considering:</p>
+<ol>
+<li><strong>Enhanced User Interface</strong>: Making the app more visually appealing and user-friendly to improve the overall experience.</li>
+<li><strong>Real-time Updates</strong>: Implementing WebSocket support to provide users with real-time updates on news headlines.</li>
+<li><strong>Personalized News Feeds</strong>: Allowing users to customize their news feeds based on their interests or preferred sources.</li>
+<li><strong>Offline Access</strong>: Adding a feature to allow users to save articles for offline reading.</li>
+<li><strong>AI-Powered Summaries</strong>: Leveraging AI to generate concise summaries of the headlines for quicker consumption.</li>
+</ol>
+<p>I’m excited about the journey ahead and can’t wait to see how Frontpages evolves. Stay tuned for more updates!</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>My Very First Project: Building Something I Needed</title>
+			<link>//localhost:1313/en/posts/building-something-i-needed/</link>
+			<pubDate>Sun, 23 Jun 2024 10:27:08 +0100</pubDate>
+			
+			<guid>//localhost:1313/en/posts/building-something-i-needed/</guid>
+			<description><![CDATA[%!s(<nil>)]]></description>
+			<content type="html"><![CDATA[<p>As a beginner software developer looking to break into the workforce, one of the common questions I face is: what kind of project should I build to showcase my skills? One of the more popular replies is along the lines of &ldquo;Build something you can use&rdquo; or &ldquo;Build something that solves a problem for yourself.&rdquo; This advice can be frustrating for me because I find it difficult to come up with ideas. I see myself as a soldier, a very good one, the kind you point at a problem and get good results delivered. So, coming up with a project that I would find useful was always going to be tricky.</p>
+<p>I finally had my Eureka moment when an idea popped into my head. I am an avid news follower; it is part of my daily routine. From watching a large chunk—sometimes all 3-hours—of The Morning Show on Arise TV on YouTube, to browsing different sites to see what is happening in my country and the world at large. I hope you can see where I am going with this. It dawned on me that I could try to collect the front pages of some of the popular newspapers in my country, as quite a number of them have them on display on their website. I could aggregate them and serve them to myself somehow.</p>
+<p>I must admit I was quite pleased with myself for coming up with this idea, as it was definitely going to be useful for me, which I have come to agree is really important. This is how <a href="https://github.com/plutack/Newspaper-Frontpage-Aggregator">newspaper frontpage aggregator</a> was born.</p>
+<p>Stay tuned for my next post, where I will detail the building process, the challenges I faced, and the solutions I found along the way.</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>My Very First Post</title>
+			<link>//localhost:1313/en/posts/post-1/</link>
+			<pubDate>Sat, 22 Jun 2024 09:50:16 +0100</pubDate>
+			
+			<guid>//localhost:1313/en/posts/post-1/</guid>
+			<description><![CDATA[%!s(<nil>)]]></description>
+			<content type="html"><![CDATA[<h1 id="setting-up-hugo-on-github-pages">Setting Up Hugo on Github pages</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Hello world&#34;</span>);
+</span></span></code></pre></div>]]></content>
+		</item>
+		
+	</channel>
+</rss>

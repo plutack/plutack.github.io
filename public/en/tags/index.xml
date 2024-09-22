@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Blog</title>
+    <link>//localhost:1313/en/tags/</link>
+    <description>Recent content in Tags on Blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 22 Sep 2024 13:17:08 +0100</lastBuildDate>
+    <atom:link href="//localhost:1313/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dev-Notes</title>
+      <link>//localhost:1313/en/tags/dev-notes/</link>
+      <pubDate>Sun, 22 Sep 2024 13:17:08 +0100</pubDate>
+      <guid>//localhost:1313/en/tags/dev-notes/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Code</title>
+      <link>//localhost:1313/en/tags/code/</link>
+      <pubDate>Sun, 23 Jun 2024 10:27:08 +0100</pubDate>
+      <guid>//localhost:1313/en/tags/code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Projects</title>
+      <link>//localhost:1313/en/tags/projects/</link>
+      <pubDate>Sun, 23 Jun 2024 10:27:08 +0100</pubDate>
+      <guid>//localhost:1313/en/tags/projects/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
