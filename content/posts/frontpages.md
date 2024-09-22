@@ -1,7 +1,7 @@
 ---
 title: "Frontpages: Your Daily Dose of News in One Place"
 date: 2024-09-22T13:17:08+01:00
-draft: true
+draft: false
 toc: false
 images:
 tags: 
