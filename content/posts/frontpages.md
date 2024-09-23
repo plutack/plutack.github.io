@@ -147,6 +147,8 @@ While I’m thrilled with how Frontpages has turned out so far, there are always
 5. **AI-Powered Summaries**: Leveraging AI to generate concise summaries of the headlines for quicker consumption.
 
 I’m excited about the journey ahead and can’t wait to see how Frontpages evolves. Stay tuned for more updates!
+
+
 Link to Repo: 
   - [backend](https://github.com/plutack/frontpages-backend)
   - [frontend](https://github.com/plutack/frontpages-frontend)
