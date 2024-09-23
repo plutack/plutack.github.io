@@ -47,7 +47,7 @@
 {{- partial "mathjax.html" . -}}
 {{- if templates.Exists "partials/extra-foot.html" -}}{{- partial "extra-foot.html" . -}}{{- end }}
 {{ if .Page.Store.Get "hasMermaid" }}
-    <script type="module">
+    <script defer type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true,theme: 'dark' });
     </script>
