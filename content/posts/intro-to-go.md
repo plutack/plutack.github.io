@@ -6,6 +6,7 @@ toc: false
 images:
 tags: 
   - learning
+  - Go
 ---
 
 

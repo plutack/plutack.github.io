@@ -3,18 +3,30 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>//localhost:1313/en/</loc>
-    <lastmod>2024-09-22T13:17:08+01:00</lastmod>
+    <lastmod>2024-10-10T14:24:01+01:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/en/tags/go/</loc>
+    <lastmod>2024-10-10T14:24:01+01:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/en/tags/learning/</loc>
+    <lastmod>2024-10-10T14:24:01+01:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/en/posts/more-on-go-2024-10-10/</loc>
+    <lastmod>2024-10-10T14:24:01+01:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/en/posts/</loc>
+    <lastmod>2024-10-10T14:24:01+01:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/en/tags/</loc>
+    <lastmod>2024-10-10T14:24:01+01:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/en/posts/intro-to-go/</loc>
+    <lastmod>2024-09-25T18:42:50+01:00</lastmod>
   </url><url>
     <loc>//localhost:1313/en/tags/dev-notes/</loc>
     <lastmod>2024-09-22T13:17:08+01:00</lastmod>
   </url><url>
     <loc>//localhost:1313/en/posts/frontpages/</loc>
-    <lastmod>2024-09-22T13:17:08+01:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/en/posts/</loc>
-    <lastmod>2024-09-22T13:17:08+01:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/en/tags/</loc>
     <lastmod>2024-09-22T13:17:08+01:00</lastmod>
   </url><url>
     <loc>//localhost:1313/en/tags/code/</loc>

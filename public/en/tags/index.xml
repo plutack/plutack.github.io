@@ -6,8 +6,22 @@
     <description>Recent content in Tags on Blog</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 22 Sep 2024 13:17:08 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 10 Oct 2024 14:24:01 +0100</lastBuildDate>
     <atom:link href="//localhost:1313/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go</title>
+      <link>//localhost:1313/en/tags/go/</link>
+      <pubDate>Thu, 10 Oct 2024 14:24:01 +0100</pubDate>
+      <guid>//localhost:1313/en/tags/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Learning</title>
+      <link>//localhost:1313/en/tags/learning/</link>
+      <pubDate>Thu, 10 Oct 2024 14:24:01 +0100</pubDate>
+      <guid>//localhost:1313/en/tags/learning/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Dev-Notes</title>
       <link>//localhost:1313/en/tags/dev-notes/</link>
