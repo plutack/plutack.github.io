@@ -5,8 +5,54 @@
 		<description>Recent content in Posts on Blog</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en</language>
-		<lastBuildDate>Thu, 10 Oct 2024 14:24:01 +0100</lastBuildDate>
+		<lastBuildDate>Fri, 18 Oct 2024 09:51:18 +0100</lastBuildDate>
 		<atom:link href="//localhost:1313/en/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Creating a Simple Email Sender App</title>
+			<link>//localhost:1313/en/posts/creating-a-simple-email-sender-app-2024-10-18/</link>
+			<pubDate>Fri, 18 Oct 2024 09:51:18 +0100</pubDate>
+			
+			<guid>//localhost:1313/en/posts/creating-a-simple-email-sender-app-2024-10-18/</guid>
+			<description><![CDATA[%!s(<nil>)]]></description>
+			<content type="html"><![CDATA[<h2 id="a-custom-email-solution-for-a-client-from-mailing-lists-to-wails">A Custom Email Solution for a Client: From Mailing Lists to Wails</h2>
+<p>I was recently approached by a client looking to send the same email to multiple recipients. My first thought was to set up a mailing list, which seemed like the obvious solution. However, the client insisted this would not be a frequent exercise, with only around 50 intended recipients. Since my client was not very technically inclined, setting up a mailing list was quickly ruled out. Not only would it involve a recurring cost (even when not in use), but it might also be too complex for the client to manage.</p>
+<h2 id="exploring-alternatives-from-scripting-to-hosting">Exploring Alternatives: From Scripting to Hosting</h2>
+<p>As a JavaScript developer, I initially thought it wouldn’t be difficult to solve this problem with a custom script. In the past, I had worked on a project where I sent customized emails based on user data. This solution even involved sending unique messages via the Gemini API. However, this approach quickly became impractical because it would require the client to have basic knowledge of running scripts from a terminal, which was unrealistic.</p>
+<p>I then considered hosting the solution on the web. While that seemed like a workable approach, it added unnecessary complexity. I’d have to deal with setting up a domain and finding a free or paid hosting service. Another thought was to spin up a Docker container that auto-started on the client’s system whenever it was turned on. But again, Docker would introduce extra abstractions and complications for someone who wasn’t technically savvy.</p>
+<h2 id="the-move-to-compiled-languages-and-gui-considerations">The Move to Compiled Languages and GUI Considerations</h2>
+<p>Next, I thought about using a compiled language to create a single binary file that the client could run easily. However, this plan originally involved building a Command-Line Interface (CLI), which wouldn’t work for this particular user. A Terminal User Interface (TUI) was clearly not the right solution either. I then turned my attention to building a Graphical User Interface (GUI).</p>
+<p>One of the first things I built during my coding journey was a Python GUI with Tkinter. While it functioned, the overall experience and the interface design left a lot to be desired—likely due to my limited experience at the time. I wanted to find a balance between creating a user-friendly tool and keeping the development process simple for myself.</p>
+<h2 id="enter-wails-a-balanced-solution">Enter Wails: A Balanced Solution</h2>
+<p>In my search, I came across Wails, which seemed like the perfect solution. Wails allows you to use JavaScript to design the frontend while writing the backend functionality in Go. It handles the necessary bindings between the frontend and backend for smooth interaction. Since I was already learning Go and was very familiar with JavaScript, this seemed like an excellent fit. Creating a simple frontend to handle data input would be easy, and it gave me an opportunity to refine my Go skills.</p>
+<p>The benefits didn’t stop there. Unlike my experience with Python GUIs, I could now create a polished, simple-looking interface. Compared to Electron-based GUIs (which bundle Chromium or V8 and result in huge executables), Wails would give me a lightweight solution. A Wails app ships with the Go runtime, ensuring a single, small executable—much smaller than an Electron app, which was important for such a simple task.</p>
+<h2 id="how-the-application-works">How the Application Works</h2>
+<p>The solution I developed uses the <code>gomail.v2</code> package with SMTP over TLS to send emails securely. On the frontend, the user inputs their email address and an app-specific password, which they generate after enabling two-factor authentication (2FA). This ensures secure communication with their email provider.</p>
+<p>For the message body, the user can either type it directly into the application or import it from a <code>.txt</code> file. Similarly, recipient details can be entered manually or imported from a <code>.csv</code> or <code>.xlsx</code> file. The frontend ensures the validity of these files, checking for necessary fields like <code>firstname</code>, <code>lastname</code>, and <code>email address</code>. For each recipient, the email will be personalized with a greeting like: <strong>&ldquo;Dear Firstname Lastname&rdquo;</strong>, making the emails feel more personal.</p>
+<h3 id="real-time-feedback-and-logging">Real-Time Feedback and Logging</h3>
+<p>A logging section is built into the application to provide the user with real-time progress updates. Logs from the backend are sent to the frontend and displayed in a&quot;show logs screen&quot; with key milestone events highlighted using a ShadCN toast component. This ensures the user is informed about the progress of the email-sending process and any issues that may arise, offering a user-friendly experience with clear feedback.</p>
+<h4 id="application-interface-overview">Application Interface Overview</h4>
+<p>To give you a clearer picture, here&rsquo;s a visual representation of the application interface:
+
+<figure class="big" ><picture>
+          <source srcset="/images/email-sender_hu4217863900952434602.webp" type="image/webp">
+          <source srcset="/images/email-sender_hu5694349923078585541.jpg" type="image/jpeg">
+          <img src="/images/email-sender_hu4217863900952434602.webp"alt="image"  width="1920"  height="1080" />
+        </picture><figcaption>
+            <p>Email Sender UI</p>
+          </figcaption></figure></p>
+<h2 id="final-product-and-cross-platform-support">Final Product and Cross-Platform Support</h2>
+<p>The end result was a lightweight 10MB Windows executable that the client could easily run without any further guidance. One of the key features was the ability to compile the same codebase for both Linux and macOS, ensuring flexibility for future needs.</p>
+<p>By using Wails and Go, the compilation process was straightforward and well-supported for cross-platform builds, allowing for minimal overhead in delivering a truly universal solution. This also meant that as the project scaled or the client’s requirements evolved, they wouldn’t be tied to a single operating system—an important advantage for businesses today.</p>
+<h3 id="resources">Resources:</h3>
+<ul>
+<li><a href="https://github.com/plutack/Birthday-Reminder">Simple nodeJS birthday reminder app using Gemini API</a></li>
+<li><a href="https://github.com/plutack/email-sender">Email sender github repo</a></li>
+<li><a href="https://www.youtube.com/watch?v=13Ufa9i8cFo&t=115s">Creator of Wails video: Building Desktop Applications using Wails</a></li>
+<li><a href="https://wails.io/docs/introduction">Wails documentation</a></li>
+</ul>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Learning Go: POV of a JavaScript Developer PT. 2</title>
@@ -191,7 +237,7 @@ The basic syntax for declaring a function in Go is as follows:</p>
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">Balance</span>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Notice the distinction?</p>
-<h3 id="field-alignment">Field Alignment\</h3>
+<h3 id="field-alignment">Field Alignment</h3>
 <p>An important concept encountered when defining a struct is <strong>field alignment</strong>. Field alignment is a thing  because different types have varying byte sizes in memory. Depending on the arrangement of your fields in the struct definition, you might use more memory than necessary every time you create a new instance of your struct. Practically, this difference in memory usage is often negligible unless the struct contains a large number of fields.</p>
 <h3 id="methods-vs-functions">Methods vs Functions</h3>
 <p>Just like in JavaScript, both concepts exist in Go. However, methods are defined on structs, while in JavaScript, methods are defined within classes.</p>
@@ -199,56 +245,56 @@ The basic syntax for declaring a function in Go is as follows:</p>
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">Feature</th>
-          <th style="text-align: left">Type Aliasing</th>
-          <th style="text-align: left">Type Definition</th>
+          <th>Feature</th>
+          <th>Type Aliasing</th>
+          <th>Type Definition</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">Syntax</td>
-          <td style="text-align: left"><code>type NewType = ExistingType</code></td>
-          <td style="text-align: left"><code>type NewType ExistingType</code></td>
+          <td>Syntax</td>
+          <td><code>type NewType = ExistingType</code></td>
+          <td><code>type NewType ExistingType</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">Purpose</td>
-          <td style="text-align: left">Creates an alias for an existing type.</td>
-          <td style="text-align: left">Creates a new type based on an existing type.</td>
+          <td>Purpose</td>
+          <td>Creates an alias for an existing type.</td>
+          <td>Creates a new type based on an existing type.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Compatibility</td>
-          <td style="text-align: left">The new type is interchangeable with the existing type.</td>
-          <td style="text-align: left">The new type is distinct and not interchangeable with the existing type.</td>
+          <td>Compatibility</td>
+          <td>The new type is interchangeable with the existing type.</td>
+          <td>The new type is distinct and not interchangeable with the existing type.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Type Identity</td>
-          <td style="text-align: left">Both types have the same identity.</td>
-          <td style="text-align: left">The new type has a different identity.</td>
+          <td>Type Identity</td>
+          <td>Both types have the same identity.</td>
+          <td>The new type has a different identity.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Use Cases</td>
-          <td style="text-align: left">Simplifying long type names or enhancing readability.</td>
-          <td style="text-align: left">Creating distinct types for better type safety.</td>
+          <td>Use Cases</td>
+          <td>Simplifying long type names or enhancing readability.</td>
+          <td>Creating distinct types for better type safety.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Example</td>
-          <td style="text-align: left"><code>type money = float64</code></td>
-          <td style="text-align: left"><code>type money float64</code></td>
+          <td>Example</td>
+          <td><code>type money = float64</code></td>
+          <td><code>type money float64</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">Type Checking</td>
-          <td style="text-align: left">No new type; type checks will pass.</td>
-          <td style="text-align: left">Type checks will fail when trying to use them interchangeably.</td>
+          <td>Type Checking</td>
+          <td>No new type; type checks will pass.</td>
+          <td>Type checks will fail when trying to use them interchangeably.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Method Sets</td>
-          <td style="text-align: left">Same method set as the original type. (e.g., <code>money</code> can now be passed with all methods that can be used with <code>float64</code>).</td>
-          <td style="text-align: left">Can have a different method set.(i.e., methods need to be user-defined).</td>
+          <td>Method Sets</td>
+          <td>Same method set as the original type. (e.g., <code>money</code> can now be passed with all methods that can be used with <code>float64</code>).</td>
+          <td>Can have a different method set.(i.e., methods need to be user-defined).</td>
       </tr>
       <tr>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
+          <td></td>
+          <td></td>
+          <td></td>
       </tr>
   </tbody>
 </table>

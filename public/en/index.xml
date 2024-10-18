@@ -6,8 +6,15 @@
     <description>Recent content on Blog</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 10 Oct 2024 14:24:01 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 18 Oct 2024 09:51:18 +0100</lastBuildDate>
     <atom:link href="//localhost:1313/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating a Simple Email Sender App</title>
+      <link>//localhost:1313/en/posts/creating-a-simple-email-sender-app-2024-10-18/</link>
+      <pubDate>Fri, 18 Oct 2024 09:51:18 +0100</pubDate>
+      <guid>//localhost:1313/en/posts/creating-a-simple-email-sender-app-2024-10-18/</guid>
+      <description>&lt;h2 id=&#34;a-custom-email-solution-for-a-client-from-mailing-lists-to-wailsjs&#34;&gt;A Custom Email Solution for a Client: From Mailing Lists to Wails.js&lt;/h2&gt;&#xA;&lt;p&gt;I was recently approached by a client looking to send the same email to multiple recipients. My first thought was to set up a mailing list, which seemed like the obvious solution. However, the client insisted this would not be a frequent exercise, with only around 50 intended recipients. Since my client was not very technically inclined, setting up a mailing list was quickly ruled out. Not only would it involve a recurring cost (even when not in use), but it might also be too complex for the client to manage.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Learning Go: POV of a JavaScript Developer PT. 2</title>
       <link>//localhost:1313/en/posts/more-on-go-2024-10-10/</link>
