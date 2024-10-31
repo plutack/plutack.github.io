@@ -1,5 +1,5 @@
 ---
-title: "Contributing to Open Source: A beginner's Guide"
+title: "Contributing to Open Source: A beginner's experience"
 date: 2024-10-31T14:57:04+01:00
 draft: false
 toc: false
@@ -7,7 +7,7 @@ images:
 tags: 
   - dev-notes
 ---
-# A Beginner's Guide to Open Source: My Unexpected Journey
+# A Beginner's Experience to Open Source: My Personal Experience
 
 When I first started my tech career, a lot of people told me, "Contribute to open source!" While I get why it's a valuable experience, I couldn't shake the feeling that it just didn't make sense for a beginner. I kept asking myself: How does a novice even start contributing to an open-source codebase? 
 
