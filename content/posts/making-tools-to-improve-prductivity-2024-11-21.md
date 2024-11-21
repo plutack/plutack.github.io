@@ -1,7 +1,7 @@
 ---
 title: "Solving the Research Rabbit Hole: Building Tools to Stay Focused"
 date: 2024-11-21T13:22:21+01:00
-draft: true
+draft: false
 toc: false
 images:
 tags: 
