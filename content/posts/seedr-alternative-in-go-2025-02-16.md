@@ -97,3 +97,7 @@ flowchart TD
 In my next blog post, I’ll dive deeper into the frontend implementation, my decision to use raw SQL instead of an ORM, the WebSocket implementation, and additional features I plan to build.
 
 Stay tuned!
+
+## Links to Resources
+ - [https://github.com/Melkeydev/go-blueprint](https://github.com/Melkeydev/go-blueprint)
+ - [Reddit post on structuring go code](https://www.reddit.com/r/golang/comments/qwyk3k/what_is_the_best_way_to_organize_code_within_a_go/)
