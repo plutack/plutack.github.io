@@ -1,7 +1,7 @@
 ---
 title: "Building My Own Seedr Alternative in Go"
 date: 2025-02-16T21:10:05+01:00
-draft: true
+draft: false
 toc: false
 images:
 tags: 
