@@ -9,7 +9,7 @@ theme = "hermit-v2"
 title = 'Blog'
 
 [languages.en.params]
-homeSubtitle = "unfiltered thoughts"
+homeSubtitle = "Software development documentaries in writing"
 weight = 1
 #  [languages.fr]
 #    title = 'CHANGE ME(FR)'
@@ -51,7 +51,7 @@ about = "talut-salako.md"
 
 [blackfriday]
 
-# hrefTargetBlank = true
+hrefTargetBlank = true
 # noreferrerLinks = true
 # nofollowLinks = true
 [taxonomies]
@@ -79,8 +79,8 @@ footerCopyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" tar
 themeColor = "#494f5c"
 #homeSubtitle = "CHANGE ME HOME SUBTITLE"
 # bgImg = ""
-# gitUrl = "https://github.com/plutack"
-justifyContent = false
+gitUrl = "https://github.com/plutack"
+justifyContent = true
 relatedPosts = true
 code_copy_button = true
 homeSubtitlePrinter = true
@@ -105,6 +105,10 @@ url = "https://x.com/salakotalut"
 [[params.socialLinks]]
 name = "github"
 url = "https://github.com/plutack"
+
+[[params.socialLinks]]
+name = "linkedin"
+url = "https://linkedin.com/in/talut-salako"
 
 [menu]
 
