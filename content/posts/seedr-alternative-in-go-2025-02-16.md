@@ -27,7 +27,7 @@ This project was the perfect way to dive deeper into Go, especially in structuri
 
 ## The Initial Struggles
 
-The beginning was overwhelming. I wasn’t sure how to start, and it seemed like there were no necessarily strong "official" opinions on project structuring. Considering the chance of encountering cyclic dependency import problems and the new folder-like package structure Go exposed me to, this led to **days of procrastination**. During my research, I stumbled upon the **[Merkley Go Blueprint](https://docs.go-blueprint.dev/)** and a Reddit thread discussing this exact problem. While I didn’t end up using the blueprint, it gave me valuable insights into structuring my code.
+The beginning was overwhelming. I wasn’t sure how to start, and it seemed like there were no necessarily strong "official" opinions on project structuring. Considering the chance of encountering cyclic dependency import problems and the new folder-like package structure Go exposed me to, this led to **days of procrastination**. During my research, I stumbled upon the **[Melkey's Go Blueprint](https://docs.go-blueprint.dev/)** and a Reddit thread discussing this exact problem. While I didn’t end up using the blueprint, it gave me valuable insights into structuring my code.
 
 However, my biggest realization came later as I didn’t fully understand how my app would work **code-wise**. I knew what I wanted to build, but when I started brainstorming the actual implementation, I saw gaps in my understanding. This is something I’ve noticed in many of my past projects: **things seem clear in my head, but when I try to write them down, the gaps become obvious.** Going forward, **before writing any code, I will always start with a solid plan on paper.**
 
@@ -101,3 +101,4 @@ Stay tuned!
 ## Links to Resources
  - [https://github.com/Melkeydev/go-blueprint](https://github.com/Melkeydev/go-blueprint)
  - [Reddit post on structuring go code](https://www.reddit.com/r/golang/comments/qwyk3k/what_is_the_best_way_to_organize_code_within_a_go/)
+ - [Seedrlike Repo](https://github.com/plutack/seedrlike)
