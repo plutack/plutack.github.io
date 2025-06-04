@@ -10,12 +10,14 @@ For the past three months, I've been intermittently developing [Seedrlike]({{< r
 ## Initial Forays into Go
 
 When I embarked on building seedrlike, Go was still relatively new territory for me. Navigating its syntax, unique features like embedding via composition (as opposed to traditional inheritance), and its idiomatic error handling presented a learning curve. However, over these past few weeks, I've definitely felt a significant improvement in my proficiency and comfort with the language.
-Seedrlike: Core Functionality and Evolution
+
+## Seedrlike: Core Functionality and Evolution
 
 On the surface, seedrlike is a straightforward web application. Its primary domain logic revolves around processing torrent links. Initially, these links were added to a Go channel. As the design evolved, this was refactored to use a map. A global worker service would monitor this collection for new additions and handle the downloads. In the early stages (when it was an array/slice, before the map), this worker operated as an infinite loop, processing tasks synchronously, one by one. After a torrent is downloaded, the application also handles zipping the folder if the user requested it.
 
 A key external dependency is Gofile, my chosen third-party storage solution. Gofile has a well-documented API, but to streamline its integration into seedrlike, I took a detour to create a Go API wrapper. This side project was also an excellent opportunity to practice writing a reusable Go package, adhering strictly to semantic versioning (semver) principles.
-Reaching an MVP and Tackling New Features
+
+## Reaching an MVP and Tackling New Features
 
 Eventually, seedrlike reached its first usable state (Minimum Viable Product). However, as I started to add more features, I encountered new challenges, particularly around providing better feedback to the user.
 
@@ -46,11 +48,11 @@ Here's a look at the evolution of the zipping logic:
 
 Zipping: Before
 
+```go
 // Original call to ZipFolder
 if err = upload.ZipFolder(originalPath, zipPath); err != nil {
     // Handle error
 }
-```go
 // Original ZipFolder function
 func ZipFolder(source string, destination string) error {
     zipFile, err := os.Create(destination)
@@ -348,8 +350,8 @@ func uploadFile(fullFilePath string, parentFolderID string, rootFolderID string,
 
 The gofile dependency's internal upload function (which is called by uploadClient.UploadFile) is responsible for creating an io.PipeReader and using a custom progressReader (similar to the one for zipping) that invokes the provided onProgress callback as data is read from the file and written to the multipart request body.
 ```go
-// Snippet from your Gofile API wrapper dependency (illustrative)
-// type ProgressCallback func(bytesRead int64) // Simplified from original for context
+// Snippet from the Gofile API wrapper dependency (illustrative)
+ type ProgressCallback func(bytesRead int64) 
 
 type progressReader struct {
     io.Reader
@@ -417,7 +419,6 @@ func (c *Client) upload(filePath string, folderId string, contentType *string, o
             pw.CloseWithError(err)
             return
         }
-        // pw.CloseWithError(formWriter.Close()) // Already deferred
     }()
 
     *contentType = formWriter.FormDataContentType()
@@ -428,7 +429,8 @@ func (c *Client) upload(filePath string, folderId string, contentType *string, o
 
 Gofile client's UploadFile method except from the third party dependency
 ```go
-func (c *Client) UploadFile(server string, filePath string, folderID string, callbackUpdate ProgressCallback) (*UploadResponseInfo, error) { // Changed return type for clarity
+func (c *Client) UploadFile(server string, filePath string, folderID string, callbackUpdate ProgressCallback) (*UploadResponseInfo, error) {
+    // Changed return type for clarity
     uploadURL := getUploadServerURL(server)
     var requestContentType string
     
@@ -488,6 +490,7 @@ Before I consider seedrlike "complete" for its current scope, I'd like to addres
 This approach is a bit clunky. A better solution would be to use context.Context. For instance, context.WithDeadline could set a timeout that scales based on estimated upload speed and file size, allowing for more robust and flexible timeout management. Alternatively, I could use `http.NewRequestWithContext` instead, which enables attaching a context directly to the request without altering the global `http.Client`.
 
 2. **Enhanced Concurrency**: I'd also like to leverage Go's powerful concurrency model more effectively. Currently, tasks are processed sequentially. I initially switched from channels to a map for task management, but the optimal solution likely involves a combination. My plan is to implement a global worker pool that can process a configurable number of tasks concurrently (e.g., 3 downloads at a time). This system would also need to track available resources, such as disk storage, to prevent issues like running out of space, especially if multiple large torrents are downloaded and then zipped. `sync.WaitGroup` could be employed to manage and synchronize these concurrent download goroutines.
+    
 ## Takeaways and Reflections
 
 For the frontend, I chose a combination of HTMX, Alpine.js, and Tailwind CSS. This was primarily driven by an enthusiasm to explore new technologies. In retrospect, while the backend carries most of the heavy lifting in this application, React (my usual go-to) might have been overkill.
