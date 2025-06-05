@@ -1,7 +1,13 @@
 ---
 title: "Seedrlike: A Three-Month Development Journey and Retrospective"
-date: 2025-06-03T10:31:10+01:00
+date: 2025-06-04T10:31:10+01:00
 draft: false
+toc: false
+images:
+tags: 
+  - dev-notes
+  - code
+  - projects
 ---
 
 
@@ -498,3 +504,7 @@ For the frontend, I chose a combination of HTMX, Alpine.js, and Tailwind CSS. Th
 My experience with this frontend stack was not entirely smooth, but HTMX's approach to enhancing HTML did provide valuable insights into DOM interactions and server-rendered partials. I later discovered other tools like DataStar and Templ UI (for Go templates) that might have eased frontend development further, albeit too late for this iteration.
 
 Overall, building seedrlike has been a rewarding experience. It's actively deployed and I use it almost daily. The project has significantly boosted my understanding of Go and provided practical experience in tackling real-world application development challenges.
+
+## Sources
+    - [Seedrlike github repo](https://github.com/plutack/seedrlike)
+)
