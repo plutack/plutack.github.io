@@ -76,7 +76,7 @@ dateformNumTime = "2006-01-02 15:04 -0700"
 # description = "My Blog Site"
 # images = [""]
 footerCopyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
-themeColor = "#494f5c"
+themeColor = "#2e3440"
 #homeSubtitle = "CHANGE ME HOME SUBTITLE"
 # bgImg = ""
 gitUrl = "https://github.com/plutack"
