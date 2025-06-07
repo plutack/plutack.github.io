@@ -1,7 +1,7 @@
 ---
 title: "Seedrlike: A Three-Month Development Journey and Retrospective"
 date: 2025-06-04T10:31:10+01:00
-draft: false
+draft: true
 toc: false
 images:
 tags: 
@@ -29,15 +29,15 @@ Eventually, seedrlike reached its first usable state (Minimum Viable Product). H
 
 The seedrlike interface initially only displayed backend activity during the file downloading phase. But a task can exist in several states:
 
-    Pending: The initial state for every task after a link is added. Torrent metadata is unknown at this point.
+- **Pending**: The initial state for every task after a link is added. Torrent metadata is unknown at this point.
 
-    Downloading: The state after torrent metadata is fetched and all necessary information is populated.
+- **Downloading**: The state after torrent metadata is fetched and all necessary information is populated.
 
-    Zipping: If the user specifies, this state follows downloading.
+- **Zipping**: If the user specifies, this state follows downloading.
 
-    Uploading: The state where the downloaded (and possibly zipped) file is being uploaded to a Gofile server.
+- **Uploading**: The state where the downloaded (and possibly zipped) file is being uploaded to a Gofile server.
 
-    Intermediate States: There are also brief transitional states between these primary ones.
+- **Intermediate States**: There are also brief transitional states between these primary ones.
 
 As mentioned, the frontend initially only provided feedback (progress bar, percentage completion, ETA) during the "Downloading" state. Once that completed, the user had no visibility into subsequent processes like zipping or uploading, as no websocket updates were sent during these stages.
 Enhancing Real-time Feedback: Websockets and Callbacks
@@ -475,28 +475,58 @@ func (c *Client) UploadFile(server string, filePath string, folderID string, cal
 
 ## Moving Forward: Planned Improvements
 
-Before I consider seedrlike "complete" for its current scope, I'd like to address a few areas:
+Before I consider Seedrlike “complete” for its current scope and moving on to something new, there are a few areas I’d like to improve:
+1. Context-Aware Requests
+As I’ve become more comfortable with Go’s context package, it's clear that my current approach to managing HTTP request timeouts can be significantly improved.At the moment, the UploadFile method in my GoFile API client manually disables and then resets the global `http.Client` timeout:
 
-1. **Context-Aware Requests**: Having gained more insight into Go's context package, I see opportunities to improve request handling, particularly for HTTP calls. Currently, my Gofile API client's `UploadFile` method manually sets and unsets the `http.Client`'s Timeout:
+```go 
+// Current approach in GoFile client
+func (c *Client) UploadFile(server string, filePath string, folderID string, callbackUpdate ProgressCallback) (*http.Response, error) {
+    c.httpClient.Timeout = 0 // Disable timeout for potentially long uploads
+    req, err := http.NewRequest(http.MethodPost, u, pr)
+    response, err := c.httpClient.Do(req)
+    c.httpClient.Timeout = 1 * time.Minute // Reset timeout
+    return response, nil
+}
+```
 
-    ```go
-    // Current approach in Gofile client
-    func (c *Client) UploadFile(server string, filePath string, folderID string, callbackUpdate ProgressCallback) (*http.Response, error) {
-        // ...
-        c.httpClient.Timeout = 0 // Disable timeout for potentially long uploads
-        req, err := http.NewRequest(http.MethodPost, u, pr)
-        // ...
-        response, err := c.httpClient.Do(req)
-        // ...
-        c.httpClient.Timeout = 1 * time.Minute // Reset timeout
-        return response, nil
-    }
-    ```
+This is both brittle and unsafe, especially in concurrent settings. A more idiomatic and robust solution would involve using `context.WithTimeout` or `context.WithDeadline` to set timeouts per request based on factors like file size and expected upload speed.
 
-This approach is a bit clunky. A better solution would be to use context.Context. For instance, context.WithDeadline could set a timeout that scales based on estimated upload speed and file size, allowing for more robust and flexible timeout management. Alternatively, I could use `http.NewRequestWithContext` instead, which enables attaching a context directly to the request without altering the global `http.Client`.
+For example:
+```go
+ctx, cancel := context.WithTimeout(context.Background(), estimatedUploadDuration)
+defer cancel()
+req, err := http.NewRequestWithContext(ctx, http.MethodPost, u, pr)
+```
 
-2. **Enhanced Concurrency**: I'd also like to leverage Go's powerful concurrency model more effectively. Currently, tasks are processed sequentially. I initially switched from channels to a map for task management, but the optimal solution likely involves a combination. My plan is to implement a global worker pool that can process a configurable number of tasks concurrently (e.g., 3 downloads at a time). This system would also need to track available resources, such as disk storage, to prevent issues like running out of space, especially if multiple large torrents are downloaded and then zipped. `sync.WaitGroup` could be employed to manage and synchronize these concurrent download goroutines.
-    
+This approach avoids mutating the global `http.Client` state and gives each request its own lifecycle control.
+
+2. Enhanced Concurrency
+
+Right now, tasks are processed sequentially. While this made things easier in the early stages, it's no longer scalable. Previously, I replaced channel-based queuing with a task map for better visibility and tracking. However, the optimal solution likely combines both: channels for queuing tasks and maps for tracking state.
+
+The goal is to introduce a global worker pool with a configurable concurrency limit (e.g., process up to 3 torrents simultaneously). This pool would coordinate:
+
+ - Torrent downloading
+ - Zipping (if needed)
+ - Uploading to GoFile
+
+Resource awareness will also be important—especially disk usage. For example, if multiple large torrents are queued, I’ll need logic to delay or cancel new downloads if available disk space is low.
+
+Goroutines combined with `sync.WaitGroup` or/and `semaphore.Weighted` will help manage this concurrency safely and efficiently.
+
+3. Dynamic Configuration via Environment Variable Loader
+
+Some variables—like  GoFile root folder ID, or number of concurrent downloads, number of downloads that can be queued, temp storage path etc act like constants but really shouldn't be hardcoded. Their values often change based on the environment or specific deployment needs.
+
+To address this, I plan to adopt a more flexible config loading solution, possibly using a package like [viper](https://github.com/spf13/viper). This would allow:
+
+ - Loading config values from environment variables, config files, or flags
+ - Live reloading (in some cases)
+ - A cleaner separation between defaults, runtime overrides, and environment-specific behaviors
+
+This will make the codebase more adaptable, particularly for self-hosting or future containerized deployments.
+
 ## Takeaways and Reflections
 
 For the frontend, I chose a combination of HTMX, Alpine.js, and Tailwind CSS. This was primarily driven by an enthusiasm to explore new technologies. In retrospect, while the backend carries most of the heavy lifting in this application, React (my usual go-to) might have been overkill.
@@ -506,5 +536,6 @@ My experience with this frontend stack was not entirely smooth, but HTMX's appro
 Overall, building seedrlike has been a rewarding experience. It's actively deployed and I use it almost daily. The project has significantly boosted my understanding of Go and provided practical experience in tackling real-world application development challenges.
 
 ## Sources
-    - [Seedrlike github repo](https://github.com/plutack/seedrlike)
-)
+
+- [Seedrlike github repo](https://github.com/plutack/seedrlike)
+
