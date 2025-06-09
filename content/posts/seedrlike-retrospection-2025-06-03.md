@@ -1,7 +1,7 @@
 ---
 title: "Seedrlike: A Three-Month Development Journey and Retrospective"
-date: 2025-06-04T10:31:10+01:00
-draft: true
+date: 2025-06-09T10:31:10+01:00
+draft: false
 toc: false
 images:
 tags: 
