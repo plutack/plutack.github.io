@@ -40,7 +40,8 @@ The seedrlike interface initially only displayed backend activity during the fil
 - **Intermediate States**: There are also brief transitional states between these primary ones.
 
 As mentioned, the frontend initially only provided feedback (progress bar, percentage completion, ETA) during the "Downloading" state. Once that completed, the user had no visibility into subsequent processes like zipping or uploading, as no websocket updates were sent during these stages.
-Enhancing Real-time Feedback: Websockets and Callbacks
+
+## Enhancing Real-time Feedback: Websockets and Callbacks
 
 To implement comprehensive real-time updates, I needed to extend websocket announcements to cover the zipping and uploading stages.
 
