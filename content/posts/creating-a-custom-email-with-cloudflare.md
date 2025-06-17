@@ -1,7 +1,7 @@
 ---
 title: "Creating a Custom Email Address with Cloudflare Email Routing"
-date: 2025-06-05T06:42:23+01:00
-draft: true
+date: 2025-06-16T06:42:23+01:00
+draft: false
 toc: false
 images:
 tags: 
