@@ -5,7 +5,7 @@ draft: false
 toc: false
 images:
 tags: 
-  - untagged
+  - dev-notes
 ---
 
 Recently, I've been thinking of a better way to use local service addresses. I mean, there's a reason we don't use raw IP addresses but instead use human-readable names to access the various sites we use daily. Every now and then, whether it's for my blog testing environment or accessing my local dev databases like MongoDB and MariaDB, I would sometimes have to look up the port number designated as the default for that service. This shouldn't necessarily be a hassle, but I've come to understand that things you set up yourself—which obviously then come more naturally to you—tend to stick better, long-term memorization-wise. This isn't to say one cannot just memorize the default port of these commonly used services anyway, but why "cram" when you can use this opportunity to gain better insight, even if it's a bit shallow, about how things work?
