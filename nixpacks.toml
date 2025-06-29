@@ -2,12 +2,10 @@
 nixpkgsArchive = "f7d1b62ae0bda6cc444ba2a75911c0f56a107458"
 
 [phases.setup]
-nixPkgs = ["hugo"]
+nixPkgs = ["...", "hugo"]
 
 [phases.build]
 cmds = ["hugo --minify"]
 
 [start]
-cmd = "caddy file-server --root public --listen :$PORT"
-runImage = "caddy:alpine"
 onlyIncludeFiles = ["public"]
