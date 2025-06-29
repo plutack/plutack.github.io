@@ -7,5 +7,5 @@ nixPkgs = ["...", "hugo"]
 [phases.build]
 cmds = ["hugo --minify"]
 
-[start]
-onlyIncludeFiles = ["public"]
+[[nixpacks.included_files]]
+paths = ["public"]
