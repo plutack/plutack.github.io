@@ -1,11 +1,11 @@
 [phases.setup]
-aptPkgs = ["hugo"]
+nixPkgs = ["hugo"]
 
 [ phases.build ]
-cmds = ["hugo --minify"]
-
-[ environment ]
-HUGO_VERSION = "0.147.9"
+cmds = [
+  "git submodule update --init --recursive",
+  "hugo --minify"
+]
 
 [[ nixpacks.included_files ]]
-paths = ["/public"]
+paths = ["public"]

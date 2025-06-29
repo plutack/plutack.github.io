@@ -1,4 +1,4 @@
-baseURL = "plutack.github.io"
+baseURL = "blog.talut.xyz"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 theme = "hermit-v2"
