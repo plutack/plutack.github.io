@@ -3,7 +3,6 @@ nixPkgs = ["hugo"]
 
 [ phases.build ]
 cmds = [
-  "git submodule update --init --recursive",
   "hugo --minify"
 ]
 
